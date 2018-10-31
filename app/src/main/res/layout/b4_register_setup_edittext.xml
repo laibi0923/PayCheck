@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#ffffff">
+
+	<TextView
+		android:id="@+id/register_page_title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:text="Title"
+		android:layout_marginTop="50dp"
+		android:padding="30dp"/>
+
+	<EditText
+		android:id="@+id/register_page_edittext"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/register_page_title"
+		android:layout_marginTop="30dp"
+		android:layout_marginLeft="30dp"
+		android:layout_marginRight="30dp"/>
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/register_page_edittext"
+		android:textAlignment="center"
+		android:textColor="@color/signpage_warrning_color"
+		android:text="Here will show error message, when use input wrong values."
+		android:layout_margin="30dp"
+		android:id="@+id/register_page_errormsg"/>
+
+	<RelativeLayout
+		android:id="@+id/register_page_submitbtn"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/radius_bg_gary"
+		android:layout_alignParentBottom="true"
+		android:layout_margin="15dp"
+		android:clickable="true"
+		android:gravity="center"
+		android:padding="7dp">
+
+		<TextView
+			android:id="@+id/sign_screen_submit_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/register_next"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:textColor="@color/signpage_submit_normal_color"/>
+
+	</RelativeLayout>
+
+</RelativeLayout>
+

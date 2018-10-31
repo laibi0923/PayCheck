@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/register_page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Title"
+        android:layout_marginTop="50dp"
+        android:padding="30dp"/>
+
+    <RadioGroup
+        android:layout_below="@+id/register_page_title"
+        android:id="@+id/gender_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/gender_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="@string/register_gender_male"/>
+
+        <RadioButton
+            android:id="@+id/gender_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="@string/register_gender_female"/>
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gender_group"
+        android:textAlignment="center"
+        android:textColor="@color/signpage_warrning_color"
+        android:text="Here will show error message, when use input wrong values."
+        android:layout_margin="30dp"
+        android:id="@+id/register_page_errormsg"/>
+
+
+    <RelativeLayout
+        android:id="@+id/register_page_submitbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/radius_bg_gary"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="7dp">
+
+        <TextView
+            android:id="@+id/sign_screen_submit_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下一頁"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/signpage_submit_normal_color"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

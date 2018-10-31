@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:gravity="center"
+	android:background="#FFFFFF">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="30dp">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/register_title"
+			android:textAlignment="center" />
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="30dp"
+			android:text="@string/register_start_content"
+			android:textAlignment="center" />
+
+	</LinearLayout>
+
+	<RelativeLayout
+		android:id="@+id/start_register_btn"
+		android:layout_width="match_parent"
+		android:layout_height="35dp"
+		android:background="@drawable/radius_bg_gary"
+		android:layout_margin="15dp"
+		android:clickable="true"
+		android:gravity="center"
+		android:padding="7dp">
+
+		<TextView
+			android:id="@+id/start_register_btn_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="開始"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:textColor="@color/signpage_submit_normal_color"
+			android:textSize="12dp" />
+
+	</RelativeLayout>
+
+</LinearLayout>
+

@@ -1,0 +1,170 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="@color/colorPrimary">
+
+	<!--Toolbar 部份-->
+	<RelativeLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:id="@+id/acmanagmentcardLinearLayout1">
+
+		<RelativeLayout
+			android:id="@+id/toolbar_back_button"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:padding="15dp" >
+
+			<ImageView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:src="@drawable/ic_arrow_left"
+				android:tint="@color/colorNormalTextcolor"/>
+
+		</RelativeLayout>
+
+		<TextView
+			android:id="@+id/toolbar_title_textview"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:text="新增信用卡帳戶"
+			android:layout_centerInParent="true"/>
+
+	</RelativeLayout>
+
+	<!--控制按鈕-->
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:padding="5dp">
+
+		<!--反轉-->
+		<RelativeLayout
+			android:id="@+id/rotate_card_button"
+			android:layout_width="35dp"
+			android:layout_height="35dp"
+			android:background="@drawable/ring_background"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp">
+
+			<ImageView
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:layout_centerInParent="true"
+				app:tint="#808080"
+				android:src="@drawable/baseline_repeat_black_36"/>
+
+		</RelativeLayout>
+
+		<!--顏色-->
+		<RelativeLayout
+			android:id="@+id/color_select_button"
+			android:layout_width="35dp"
+			android:layout_height="35dp"
+			android:background="@drawable/ring_background"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp">
+
+			<ImageView
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:layout_centerInParent="true"
+				app:tint="#808080"
+				android:src="@drawable/baseline_color_lens_black_36"/>
+
+		</RelativeLayout>
+
+		<!--儲存-->
+		<RelativeLayout
+			android:id="@+id/save_card_button"
+			android:layout_width="35dp"
+			android:layout_height="35dp"
+			android:background="@drawable/ring_background"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp">
+
+			<ImageView
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:layout_centerInParent="true"
+				app:tint="#808080"
+				android:src="@drawable/ic_floppy"/>
+
+		</RelativeLayout>
+
+		<!--剷除-->
+		<RelativeLayout
+			android:id="@+id/delete_card_button"
+			android:layout_width="35dp"
+			android:layout_height="35dp"
+			android:background="@drawable/ring_background"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp">
+
+			<ImageView
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:layout_centerInParent="true"
+				app:tint="#808080"
+				android:src="@drawable/baseline_delete_black_36"/>
+
+		</RelativeLayout>
+
+	</LinearLayout>
+
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:scrollbars="none">
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="vertical">
+
+			<RelativeLayout
+				android:id="@+id/card_display"
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent">
+
+				<!--卡正面-->
+				<include
+					android:id="@+id/card_front"
+					layout="@layout/d3_credit_card_face"/>
+
+				<!--卡背面-->
+				<include
+					android:id="@+id/card_black"
+					android:visibility="gone"
+					layout="@layout/d3_credit_card_black"/>
+
+			</RelativeLayout>
+
+			<!--ERROR Message Display-->
+			<TextView
+				android:id="@+id/error_message_textview"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="10dp"
+				android:textAlignment="center"
+				android:textColor="#f39090"
+				android:minLines="1"
+				android:text="This is Error Message Aera. This will show error to client.This is Error Message Aera. This will show error to client."/>
+
+			<include
+				android:id="@+id/color_manager"
+				layout="@layout/d9_newacc_color_selecter" />
+
+		</LinearLayout>
+
+	</ScrollView>
+
+</LinearLayout>
+

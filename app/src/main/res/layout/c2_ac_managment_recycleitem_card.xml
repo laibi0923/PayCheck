@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<!--卡片最後修改時間-->
+	<TextView
+		android:id="@+id/last_modify_textview"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="20dp"
+		android:layout_marginBottom="5dp"
+		android:layout_marginLeft="20dp"
+		android:layout_marginRight="20dp"
+		android:textSize="15sp"
+		android:text="2018 - 09 -15"/>
+
+	<!--卡片-->
+	<include
+		android:id="@+id/card_face"
+		layout="@layout/d3_credit_card_face" />
+
+	<!--卡片按鈕-->
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center"
+		android:layout_marginTop="5dp"
+		android:layout_marginBottom="5dp"
+		android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp">
+
+		<!--編輯-->
+		<RelativeLayout
+			android:id="@+id/card_edit_button"
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:background="@drawable/ring_background"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_width="24dp"
+				android:layout_height="20dp"
+				android:layout_centerInParent="true"
+				android:src="@drawable/baseline_create_black_36"
+				android:tint="#808080" />
+
+		</RelativeLayout>
+
+		<!--檢視所有紀錄-->
+		<RelativeLayout
+			android:id="@+id/viewall_button"
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:background="@drawable/ring_background"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:layout_centerInParent="true"
+				android:tint="#808080"
+				android:src="@drawable/baseline_visibility_black_36"/>
+
+		</RelativeLayout>
+
+		<View
+			android:layout_width="wrap_content"
+			android:layout_height="1dp"
+			android:layout_weight="1" />
+
+		<!--新增紀錄-->
+		<RelativeLayout
+			android:id="@+id/new_record_button"
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:background="@drawable/ring_background"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:layout_centerInParent="true"
+				android:tint="#808080"
+				android:src="@drawable/ic_plus"/>
+
+		</RelativeLayout>
+
+	</LinearLayout>
+
+	<!--卡片使用狀況-->
+	<TextView
+		android:id="@+id/card_message"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="20dp"
+		android:layout_marginBottom="10dp"
+		android:layout_marginLeft="20dp"
+		android:layout_marginRight="20dp"
+		android:textSize="15sp"
+		android:text="本月共新增 ? 條紀錄, 已使用共 $5,000 簽帳額, 餘額為 $100,000."/>
+
+	<!--檢視本月紀錄-->
+	<LinearLayout
+		android:id="@+id/viewlatest_button"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
+		android:layout_marginBottom="20dp"
+		android:layout_marginLeft="20dp">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:textSize="13sp"
+			android:text="檢視本月紀錄..."/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

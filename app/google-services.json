@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "842415752092",
+    "firebase_url": "https://paycheck-d2d7b.firebaseio.com",
+    "project_id": "paycheck-d2d7b",
+    "storage_bucket": "paycheck-d2d7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842415752092:android:8b4b613aaa8e4e52",
+        "android_client_info": {
+          "package_name": "com.paycheckeasy.www.paycheck"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842415752092-38rinfaodndu6vf5aab1q4fjlci8111e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.paycheckeasy.www.paycheck",
+            "certificate_hash": "92082a3aa5b1de7894ea45318ae6a703facfd9a6"
+          }
+        },
+        {
+          "client_id": "842415752092-gjlv8vbj5lre96852220cusfbchh1jkd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDze4V9JoPtCXlITKx7Njq7qSZN-hByvgI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842415752092-gjlv8vbj5lre96852220cusfbchh1jkd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

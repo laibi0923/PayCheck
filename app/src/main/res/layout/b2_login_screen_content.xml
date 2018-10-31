@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:paddingTop="15dp"
+		android:paddingBottom="15dp"
+		android:paddingLeft="25dp"
+		android:paddingRight="25dp"
+		android:background="@color/signpage_background_color">
+
+		<EditText
+			android:id="@+id/login_email_edittext"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="15dp"
+			android:background="@drawable/radius_bord_gary"
+			android:hint="@string/login_email"
+			android:inputType="textEmailAddress"
+			android:paddingBottom="8dp"
+			android:paddingLeft="20dp"
+			android:paddingRight="20dp"
+			android:paddingTop="8dp"
+			android:singleLine="true"
+			android:textSize="13dp"/>
+
+		<EditText
+			android:id="@+id/login_password_edittext"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/login_email_edittext"
+			android:layout_marginTop="25dp"
+			android:background="@drawable/radius_bord_gary"
+			android:hint="@string/login_password"
+			android:inputType="textPassword"
+			android:paddingBottom="8dp"
+			android:paddingLeft="20dp"
+			android:paddingRight="20dp"
+			android:paddingTop="8dp"
+			android:singleLine="true"
+			android:textSize="13dp"/>
+
+
+		<TextView
+			android:id="@+id/error_message_textview"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/login_password_edittext"
+			android:layout_centerHorizontal="true"
+			android:layout_marginTop="25dp"
+			android:text="This is error message, when user signin/signup fail, it will return message to warrning client."
+			android:textAlignment="center"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:textColor="@color/signpage_warrning_color"
+			android:textSize="13dp" />
+
+		<LinearLayout
+			android:id="@+id/fbandgoogle_icon"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="center"
+			android:layout_marginTop="15dp"
+            android:visibility="gone"
+			android:layout_below="@id/error_message_textview">
+
+			<ImageView
+				android:id="@+id/facebook_btn"
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:clickable="true"
+				android:src="@drawable/ic_facebook"
+				android:layout_margin="10dp"
+				android:tint="@color/color_editor_textcolor"/>
+
+			<ImageView
+				android:id="@+id/google_btn"
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:clickable="true"
+				android:layout_margin="10dp"
+				android:src="@drawable/ic_google"
+				android:tint="@color/color_editor_textcolor"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/forget_password_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="15dp"
+                android:text="@string/login_forgot_pw"
+                android:textColor="@color/signpage_normal_text_color"
+                android:textSize="12dp" />
+
+			<RelativeLayout
+				android:id="@+id/login_submit_btn"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@drawable/radius_bg_gary"
+				android:clickable="true"
+				android:gravity="center"
+				android:padding="7dp">
+
+				<TextView
+					android:id="@+id/login_submit_title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/login_submit"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:textColor="@color/signpage_submit_normal_color"/>
+
+			</RelativeLayout>
+
+		</LinearLayout>
+
+	</RelativeLayout>
+
+	<RelativeLayout
+		android:id="@+id/loading_mask_layout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:clickable="true"
+		android:visibility="gone">
+
+		<ProgressBar
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"/>
+
+	</RelativeLayout>
+
+</RelativeLayout>
+

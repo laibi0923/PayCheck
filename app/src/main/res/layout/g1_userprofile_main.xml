@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<RelativeLayout
+		android:id="@+id/backpop_Button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="?android:attr/selectableItemBackgroundBorderless">
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="10dp"
+			android:src="@drawable/ic_arrow_left"
+			android:tint="@color/colorNormalTextcolor"/>
+
+	</RelativeLayout>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:background="@color/colorPrimary"
+		android:layout_marginTop="10dp"
+		android:padding="20dp">
+
+		<com.paycheckeasy.www.paycheck.PublicClass.CircleImageView
+			android:id="@+id/headerlayout_PersonIcon"
+			android:layout_width="180dp"
+			android:layout_height="180dp"
+			app:srcCompat="@drawable/circle_background"
+			tools:layout_editor_absoluteX="106dp"
+			tools:layout_editor_absoluteY="33dp"
+			android:transitionName="user_icon"/>
+
+	</RelativeLayout>
+
+
+
+	<RelativeLayout
+		android:id="@+id/user_email_Layout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="15dp"
+		android:layout_marginTop="10dp"
+		android:background="@color/colorPrimary">
+
+		<TextView
+			android:id="@+id/user_email_TextView"
+			android:layout_width="wrap_content"
+			android:layout_height="18dp"
+			android:text="Testing@tseting.com"/>
+
+	</RelativeLayout>
+
+	<RelativeLayout
+		android:id="@+id/user_name_Layout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@color/colorPrimary"
+		android:padding="15dp"
+		android:layout_marginTop="10dp">
+
+		<TextView
+			android:id="@+id/user_name_TextView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="User Name"/>
+
+	</RelativeLayout>
+
+</LinearLayout>
+

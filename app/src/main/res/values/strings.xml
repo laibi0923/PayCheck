@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Pay Check</string>
+	<string name="drawer_open">open</string>
+	<string name="drawer_close">close</string>
+
+	<!--Login Main-->
+	<string name="signin_title">登入</string>
+	<string name="register_title">註冊</string>
+	<string name="signout_title">登出</string>
+	<string name="login_email">電郵地址</string>
+	<string name="login_password">輸入密碼</string>
+	<string name="login_forgot_pw">忘記密碼?</string>
+	<string name="login_forgot_pw_error">請輸入電郵地址</string>
+	<string name="login_submit">確定</string>
+	<string name="login_errormsg1">請輸入電郵地址或密碼</string>
+	
+	<string name="navigationview_logout">@string/signout_title</string>
+
+	<!--Register-->
+	<string name="register_start_title">開始</string>
+	<string name="register_start_content">只需簡單幾個步驟, 即可完成加入我們。</string>
+	<string name="register_start">開始</string>
+	<string name="register_next">下一步</string>
+
+	<string name="register_email">請輸入您的電郵地址</string>
+	<string name="register_email_errormsg1">請輸入電郵</string>
+	<string name="register_email_errormsg2">您所輸入的電郵格式不正確.</string>
+
+	<string name="register_password_title">請輸入密碼</string>
+	<string name="register_password_erroemsg1">密碼不能為空</string>
+
+	<string name="register_username_title">請輸入你的名稱</string>
+	<string name="register_username_erroemsg1">請輸入您的匿稱</string>
+
+	<string name="register_gender_title">請選擇性別</string>
+	<string name="register_gender_male">男</string>
+	<string name="register_gender_female">女</string>
+	<string name="register_gender_erroemsg1">請選擇性別</string>
+
+	<string name="register_yob_title">請輸出生年份</string>
+	<string name="register_yob_erroemsg1">不能為空</string>
+	<string name="register_yob_erroemsg2">輸入唔正確, 請從新輸入</string>
+
+	<string name="register_finish_title">多謝使用 Pay Check</string>
+	<string name="register_finish_content1">
+		點按註冊即表示你同意使用條款,數據使用政策和Cookie政策。
+		你可能會收到我們的短訊通知, 而且可以隨時選擇停止接收。
+		你的通訊中的資料將持續上載到 Pay Check, 以幫助你和其他人更快找到朋友。
+	</string>
+	<string name="register_finish_content2">
+		多謝使用 Pay Check
+	</string>
+	<string name="register_finish_done">完成註冊</string>
+	
+	<string name="update_log_content">
+		28 Aug 2018 \n
+			- New Function Setting
+	</string>
+	
+</resources>
+

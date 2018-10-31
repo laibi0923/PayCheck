@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:layout_marginTop="10dp">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:text="一般"
+			android:layout_marginLeft="15dp"/>
+
+        <LinearLayout
+            android:id="@+id/setting_alert"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="left|center"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_bell_ring" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/setting_alert_TextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="通知"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/setting_alert_TextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="您有 0 則通知尚未讀取"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+		<View
+			android:background="?android:attr/dividerVertical"
+			android:layout_height="1dp"
+			android:layout_width="match_parent"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp"/>
+
+		<LinearLayout
+			android:layout_height="70dp"
+			android:layout_width="match_parent"
+			android:background="?android:attr/selectableItemBackground"
+			android:clickable="true"
+			android:orientation="horizontal"
+			android:id="@+id/setting_nightmode"
+			android:gravity="left|center"
+			android:paddingLeft="15dp">
+
+			<ImageView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				android:src="@drawable/ic_brightness_4"/>
+
+			<LinearLayout
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:orientation="vertical"
+				android:layout_marginLeft="15dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:text="夜間模式 (尚未開放)"
+					android:id="@+id/night_mode_TextView1"/>
+
+                <TextView
+                    android:id="@+id/night_mode_TextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="未啟動"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<View
+			android:background="?android:attr/dividerVertical"
+			android:layout_height="1dp"
+			android:layout_width="match_parent"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp"/>
+
+		<LinearLayout
+			android:layout_height="70dp"
+			android:layout_width="match_parent"
+			android:background="?android:attr/selectableItemBackground"
+			android:clickable="true"
+			android:orientation="horizontal"
+			android:id="@+id/setting_langage"
+			android:gravity="left|center"
+			android:paddingLeft="15dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_language_black_24" />
+
+			<LinearLayout
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:orientation="vertical"
+				android:layout_marginLeft="15dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:text="語言"
+					android:id="@+id/setting_langage_TextView1"/>
+
+                <TextView
+                    android:id="@+id/setting_langage_TextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="繁體 (預設)"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<View
+			android:background="?android:attr/dividerVertical"
+			android:layout_height="1dp"
+			android:layout_width="match_parent"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp"/>
+
+		<LinearLayout
+			android:layout_height="70dp"
+			android:layout_width="match_parent"
+			android:background="?android:attr/selectableItemBackground"
+			android:clickable="true"
+			android:orientation="horizontal"
+			android:id="@+id/setting_resetpassword"
+			android:gravity="left|center"
+			android:paddingLeft="15dp">
+
+			<ImageView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				android:src="@drawable/ic_key_variant"/>
+
+			<LinearLayout
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:orientation="vertical"
+				android:layout_marginLeft="15dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:text="重設密碼"
+					android:id="@+id/setting_resetpassword_TextView1"/>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<View
+			android:background="?android:attr/dividerVertical"
+			android:layout_height="1dp"
+			android:layout_width="match_parent"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp"/>
+
+		<LinearLayout
+			android:layout_height="70dp"
+			android:layout_width="match_parent"
+			android:background="?android:attr/selectableItemBackground"
+			android:clickable="true"
+			android:orientation="horizontal"
+			android:id="@+id/setting_about"
+			android:gravity="left|center"
+			android:paddingLeft="15dp">
+
+			<ImageView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				android:src="@drawable/ic_comment_processing_outline"/>
+
+			<LinearLayout
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:orientation="vertical"
+				android:layout_marginLeft="15dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:text="關於"
+					android:id="@+id/setting_about_TextView1"/>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<View
+			android:background="?android:attr/dividerVertical"
+			android:layout_height="1dp"
+			android:layout_width="match_parent"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp"/>
+
+		<LinearLayout
+			android:layout_height="70dp"
+			android:layout_width="match_parent"
+			android:background="?android:attr/selectableItemBackground"
+			android:clickable="true"
+			android:orientation="horizontal"
+			android:id="@+id/setting_updatelog"
+			android:gravity="left|center"
+			android:paddingLeft="15dp">
+
+			<ImageView
+				android:layout_height="30dp"
+				android:layout_width="30dp"
+				android:src="@drawable/ic_console"/>
+
+			<LinearLayout
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:orientation="vertical"
+				android:layout_marginLeft="15dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:text="更新日誌"
+					android:id="@+id/setting_updatelog_TextView1"/>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+</ScrollView>

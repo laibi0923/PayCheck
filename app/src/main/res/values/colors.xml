@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- For Main -->
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#52DC8F</color>
+
+    <!-- For Sing Page -->
+    <color name="signpage_background_color">@color/colorPrimary</color>
+    <color name="signpage_warrning_color">#f39090</color>
+    <color name="signpage_normal_text_color">#989898</color>
+    <color name="signpage_submit_normal_color">#FFFFFF</color>
+    <color name="signpage_submit_ready_color">@color/colorPrimary</color>
+
+
+
+    <color name="colorNormalBackground">#FFFFFF</color>
+    <color name="colorNormalTextcolor">#808080</color>
+    <color name="colorUnderLine">#9e9e9e</color>
+    <color name="color_editor_textcolor">#989898</color>
+    <color name="ac_managment_card_textcolor">#2B2B2B</color>
+
+
+
+</resources>
