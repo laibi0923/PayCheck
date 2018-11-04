@@ -5,12 +5,14 @@ import java.text.DateFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 //import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.paycheckeasy.www.paycheck.Animation.Account_Managment_Animation;
@@ -49,7 +51,8 @@ public class Account_Managment_Main extends Fragment
 
 	private FirebaseDatabase mFirebaseDatabase;
 	private DatabaseReference mDatabaseReference;
-	private FirebaseAdapter mFirebaseAdapter;
+//	private FirebaseAdapter mFirebaseAdapter;
+    private FireStorge_Adapter mFireStorge_Adapter;
 	private FirebaseFirestore mFirebaseFirestore;
 
 	private void Find_View(View v){
@@ -95,8 +98,19 @@ public class Account_Managment_Main extends Fragment
 		mRecyclerView_List = new ArrayList<>();
 	}
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mFireStorge_Adapter.startListening();
+    }
 
-	@Override
+    @Override
+    public void onStop() {
+        super.onStop();
+        mFireStorge_Adapter.stopListening();
+    }
+
+    @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		// TODO: Implement this method
@@ -131,11 +145,10 @@ public class Account_Managment_Main extends Fragment
 		// mRecyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL));
 
         // 查詢條件
-//		Query query = mDatabaseReference
-//                .child("Account")
-//                .orderByChild( ((MainActivity)getActivity()).Uid_Text );
-
-		Query FireStorge_Query = mFirebaseFirestore.collection("Account").orderBy("Create Date");
+        /*
+		Query query = mDatabaseReference
+                .child("Account")
+                .orderByChild( ((MainActivity)getActivity()).Uid_Text );
 
         // Firebase Recycler Adapter
         mFirebaseAdapter = new FirebaseAdapter(Account_Model.class, R.layout.c2_ac_managment_recycleitem_card, Account_ViewHolder.class, FireStorge_Query, getContext());
@@ -153,6 +166,18 @@ public class Account_Managment_Main extends Fragment
 
             }
         });
+
+        */
+
+        Query query = mFirebaseFirestore.collection("Account");
+
+        FirestoreRecyclerOptions<Account_Model> options = new FirestoreRecyclerOptions.Builder<Account_Model>()
+                .setQuery(query, Account_Model.class)
+                .build();
+
+        mFireStorge_Adapter = new FireStorge_Adapter(options);
+
+        mRecyclerView.setAdapter(mFireStorge_Adapter);
 
 
     }

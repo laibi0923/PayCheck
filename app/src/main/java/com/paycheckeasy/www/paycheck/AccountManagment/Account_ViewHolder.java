@@ -29,13 +29,13 @@ public class Account_ViewHolder extends RecyclerView.ViewHolder{
 
 
 	// Card
-    private TextView Last_Modift_TextView;
-    private LinearLayout Card_Front_Background;
-    private EditText Bank_Name_EditTextView, Bank_No_First_EditText, Bank_No_Last_EditText, Holder_Name_EditText, Expiry_Date_EditText;
-    private ImageView BankCard_Associations;
+    public TextView Last_Modift_TextView;
+    public LinearLayout Card_Front_Background;
+    public EditText Bank_Name_EditTextView, Bank_No_First_EditText, Bank_No_Last_EditText, Holder_Name_EditText, Expiry_Date_EditText;
+    public ImageView BankCard_Associations;
     public RelativeLayout Edit_Button, ViewAll_Button, NewRecord_Button;
     public LinearLayout ViewLastest_Button;
-    private TextView Card_Message_TextView;
+    public TextView Card_Message_TextView;
 
 
     private String message_1 = "本月共新增";
@@ -44,7 +44,7 @@ public class Account_ViewHolder extends RecyclerView.ViewHolder{
 
 
 	// Cash
-	private EditText Cash_Name_EditText;
+    public EditText Cash_Name_EditText;
 
 
     public Account_ViewHolder(View view, String Type){

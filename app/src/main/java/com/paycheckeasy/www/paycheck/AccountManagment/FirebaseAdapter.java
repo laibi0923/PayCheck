@@ -1,22 +1,25 @@
 package com.paycheckeasy.www.paycheck.AccountManagment;
-import android.content.*;
-import android.support.v7.widget.RecyclerView;
-import android.util.*;
-import android.view.*;
-import android.widget.*;
-import com.firebase.ui.database.*;
-import com.google.firebase.database.*;
-import com.paycheckeasy.www.paycheck.*;
 
+import android.content.Context;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+//import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.Query;
 import com.paycheckeasy.www.paycheck.R;
 
+/*
 public class FirebaseAdapter extends FirebaseRecyclerAdapter<Account_Model, Account_ViewHolder>
 {
 	private Context context;
 	private Query ref;
 
+
 	public FirebaseAdapter(Class<Account_Model> model, int modelLayout, Class<Account_ViewHolder> viewHolder, Query ref, Context context){
-		super(model, modelLayout, viewHolder, ref);
+		super(model, modelLayout,viewHolder, ref);
 		this.context = context;
 		this.ref = ref;
 	}
@@ -180,3 +183,4 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Account_Model, Acco
 	}
 
 }
+*/
