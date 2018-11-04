@@ -9,8 +9,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
+//import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.paycheckeasy.www.paycheck.Animation.Account_Managment_Animation;
 import com.paycheckeasy.www.paycheck.Animation.Customer_CircularReveal;
 import com.paycheckeasy.www.paycheck.MainActivity;
@@ -48,6 +50,7 @@ public class Account_Managment_Main extends Fragment
 	private FirebaseDatabase mFirebaseDatabase;
 	private DatabaseReference mDatabaseReference;
 	private FirebaseAdapter mFirebaseAdapter;
+	private FirebaseFirestore mFirebaseFirestore;
 
 	private void Find_View(View v){
 
@@ -86,6 +89,8 @@ public class Account_Managment_Main extends Fragment
 		mFirebaseDatabase = FirebaseDatabase.getInstance();
 
 		mDatabaseReference = mFirebaseDatabase.getReference();
+
+		mFirebaseFirestore = FirebaseFirestore.getInstance();
 
 		mRecyclerView_List = new ArrayList<>();
 	}
@@ -126,12 +131,14 @@ public class Account_Managment_Main extends Fragment
 		// mRecyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL));
 
         // 查詢條件
-		Query query = mDatabaseReference
-                .child("Account")
-                .orderByChild( ((MainActivity)getActivity()).Uid_Text );
+//		Query query = mDatabaseReference
+//                .child("Account")
+//                .orderByChild( ((MainActivity)getActivity()).Uid_Text );
+
+		Query FireStorge_Query = mFirebaseFirestore.collection("Account").orderBy("Create Date");
 
         // Firebase Recycler Adapter
-        mFirebaseAdapter = new FirebaseAdapter(Account_Model.class, R.layout.c2_ac_managment_recycleitem_card, Account_ViewHolder.class, query, getContext());
+        mFirebaseAdapter = new FirebaseAdapter(Account_Model.class, R.layout.c2_ac_managment_recycleitem_card, Account_ViewHolder.class, FireStorge_Query, getContext());
 
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -193,8 +200,7 @@ public class Account_Managment_Main extends Fragment
                     NewCash_Intent.putExtra("UserName", ((MainActivity)getActivity()).DisplayName_Text);
 					
                     startActivityForResult(NewCash_Intent, 117);
-					
-					
+
                     break;
 
                 case R.id.card_FAB:

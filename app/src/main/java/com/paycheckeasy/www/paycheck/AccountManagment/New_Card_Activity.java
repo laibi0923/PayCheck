@@ -24,14 +24,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.paycheckeasy.www.paycheck.Animation.Flip_Card;
 import com.paycheckeasy.www.paycheck.PublicClass.CircleImageView;
 import com.paycheckeasy.www.paycheck.R;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class New_Card_Activity extends AppCompatActivity {
@@ -71,6 +71,7 @@ public class New_Card_Activity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mDatabaseReference;
+    private FirebaseFirestore mFirebaseFirestore;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,6 +85,8 @@ public class New_Card_Activity extends AppCompatActivity {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+        mFirebaseFirestore = FirebaseFirestore.getInstance();
 
         Init_Value();
 
@@ -614,6 +617,23 @@ public class New_Card_Activity extends AppCompatActivity {
 
         mDatabaseReference = mFirebaseDatabase.getReference().child("Account").child(DatabaseRef_Key).child(mFirebaseUser.getUid());
         mDatabaseReference.setValue(mAccount_Data.getLast_TimeStamp());
+
+        // Firebase FireStore
+        Map<String, String> New_Account_Map = new HashMap<>();
+
+        New_Account_Map.put("Create Date", String.valueOf(ServerValue.TIMESTAMP));
+        New_Account_Map.put("Last Modify", String.valueOf(ServerValue.TIMESTAMP));
+        New_Account_Map.put("Bank Name", Bank_Name_EditText.getText().toString());
+        New_Account_Map.put("Bank First Number", Bank_No_First_EditText.getText().toString());
+        New_Account_Map.put("Bank Last Number", Bank_No_Last_EditText.getText().toString());
+        New_Account_Map.put("Holder Name", Holder_Name_EditText.getText().toString());
+        New_Account_Map.put("Expirty Date", Expiry_Date_EditText.getText().toString());
+        New_Account_Map.put("Card Type", BankCard_Associations_Text);
+        New_Account_Map.put("Card Balance", Credit_Limit_EditText.getText().toString());
+        New_Account_Map.put("Remark", Remark_EditText.getText().toString());
+        New_Account_Map.put("Color Code", String.valueOf(Color_Code));
+
+        mFirebaseFirestore.collection("Account").add(New_Account_Map);
 
         Log.e("Firebase Action", "新增一條紀錄至 Firebase");
         finish();
