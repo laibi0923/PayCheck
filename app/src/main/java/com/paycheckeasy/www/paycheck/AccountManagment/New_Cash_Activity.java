@@ -274,7 +274,7 @@ public class New_Cash_Activity extends AppCompatActivity
 		  mDatabaseReference.setValue(mAccount_Data);
 
 		  mDatabaseReference = mFirebaseDatabase.getReference().child("Account").child(DatabaseRef_Key).child(mFirebaseUser.getUid());
-		  mDatabaseReference.setValue(mAccount_Data.getLast_TimeStamp());
+//		  mDatabaseReference.setValue(mAccount_Data.getLast_TimeStamp());
 
 		  Log.e("Firebase Action", "新增一條紀錄至 Firebase");
 		  finish();

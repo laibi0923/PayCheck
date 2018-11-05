@@ -116,7 +116,7 @@ public class Account_ViewHolder extends RecyclerView.ViewHolder{
 
     public void setCardValue(Account_Model value) {
 
-        Last_Modift_TextView.setText(formatter.format(value.getLast_TimeStampLong()));
+//        Last_Modift_TextView.setText(formatter.format(value.getLast_TimeStampLong()));
 
         int Color_Code = value.getColor_Code();
         Drawable Background_Color = null;
@@ -140,9 +140,9 @@ public class Account_ViewHolder extends RecyclerView.ViewHolder{
         Bank_No_Last_EditText.setText(value.getLast_Num());
         Holder_Name_EditText.setText(value.getHolder_Name());
         Expiry_Date_EditText.setText(value.getExpiry_Date());
-        
+
         String Bankcard_Associations = value.getType();
-        
+
         if (Bankcard_Associations.equals("VISA")){
             BankCard_Associations.setImageResource(R.drawable.visa_card_logo);
         }else if (Bankcard_Associations.equals("MASTER")){
@@ -181,7 +181,7 @@ public class Account_ViewHolder extends RecyclerView.ViewHolder{
 
 	public void setCashValue(Account_Model value){
 
-		Last_Modift_TextView.setText(formatter.format(value.getLast_TimeStampLong()));
+//		Last_Modift_TextView.setText(formatter.format(value.getLast_TimeStampLong()));
 
         int Color_Code = value.getColor_Code();
         Drawable Background_Color = null;
@@ -199,7 +199,7 @@ public class Account_ViewHolder extends RecyclerView.ViewHolder{
         }
 
         Card_Front_Background.setBackground(Background_Color);
-		
+
 		Cash_Name_EditText.setText(value.getCard_Name());
 
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();

@@ -3,18 +3,22 @@ import android.content.Intent;
 import java.text.DateFormat;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-//import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.paycheckeasy.www.paycheck.Animation.Account_Managment_Animation;
 import com.paycheckeasy.www.paycheck.Animation.Customer_CircularReveal;
 import com.paycheckeasy.www.paycheck.MainActivity;
@@ -52,8 +56,9 @@ public class Account_Managment_Main extends Fragment
 	private FirebaseDatabase mFirebaseDatabase;
 	private DatabaseReference mDatabaseReference;
 //	private FirebaseAdapter mFirebaseAdapter;
+    private FirebaseFirestore mFirebaseFirestore;
     private FireStorge_Adapter mFireStorge_Adapter;
-	private FirebaseFirestore mFirebaseFirestore;
+	private CollectionReference mCollectionReference;
 
 	private void Find_View(View v){
 
@@ -93,7 +98,16 @@ public class Account_Managment_Main extends Fragment
 
 		mDatabaseReference = mFirebaseDatabase.getReference();
 
+
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+
 		mFirebaseFirestore = FirebaseFirestore.getInstance();
+
+        mFirebaseFirestore.setFirestoreSettings(settings);
+
+        mCollectionReference = mFirebaseFirestore.collection("Account");
 
 		mRecyclerView_List = new ArrayList<>();
 	}
@@ -138,14 +152,16 @@ public class Account_Managment_Main extends Fragment
 		mLayout.setReverseLayout(true); 
 		
         mRecyclerView.setLayoutManager(mLayout);
-		
+
+        // RecyclerView 動畫
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 		
         // 設置下劃線 android 5.0
 		// mRecyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL));
 
-        // 查詢條件
+
         /*
+        // 查詢條件
 		Query query = mDatabaseReference
                 .child("Account")
                 .orderByChild( ((MainActivity)getActivity()).Uid_Text );
@@ -166,19 +182,30 @@ public class Account_Managment_Main extends Fragment
 
             }
         });
-
         */
 
-        Query query = mFirebaseFirestore.collection("Account");
+        // 查詢條件
+        Query query = mCollectionReference.orderBy("card_Name");
 
         FirestoreRecyclerOptions<Account_Model> options = new FirestoreRecyclerOptions.Builder<Account_Model>()
                 .setQuery(query, Account_Model.class)
                 .build();
 
-        mFireStorge_Adapter = new FireStorge_Adapter(options);
+        mFireStorge_Adapter = new FireStorge_Adapter(options, getContext());
 
-        mRecyclerView.setAdapter(mFireStorge_Adapter);
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
+                //  暫停 ProgressBar
+                mRecycleView_ProgressBar.setVisibility(View.GONE);
+                //  Setup Adapter
+                mRecyclerView.setAdapter(mFireStorge_Adapter);
+                //  如沒有料資將返回空視圖
+                mRecyclerView.setEmptyView(mRecycle_EmptyView);
+
+            }
+        });
 
     }
 

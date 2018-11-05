@@ -25,6 +25,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.paycheckeasy.www.paycheck.Animation.Flip_Card;
 import com.paycheckeasy.www.paycheck.PublicClass.CircleImageView;
@@ -72,6 +74,7 @@ public class New_Card_Activity extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mDatabaseReference;
     private FirebaseFirestore mFirebaseFirestore;
+    private CollectionReference mCollectionReference;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -612,11 +615,11 @@ public class New_Card_Activity extends AppCompatActivity {
                 Remark_EditText.getText().toString());
 
 
-        mDatabaseReference = mFirebaseDatabase.getReference().child("Account").child(DatabaseRef_Key);
-        mDatabaseReference.setValue(mAccount_Data);
-
-        mDatabaseReference = mFirebaseDatabase.getReference().child("Account").child(DatabaseRef_Key).child(mFirebaseUser.getUid());
-        mDatabaseReference.setValue(mAccount_Data.getLast_TimeStamp());
+//        mDatabaseReference = mFirebaseDatabase.getReference().child("Account").child(DatabaseRef_Key);
+//        mDatabaseReference.setValue(mAccount_Data);
+//
+//        mDatabaseReference = mFirebaseDatabase.getReference().child("Account").child(DatabaseRef_Key).child(mFirebaseUser.getUid());
+//        mDatabaseReference.setValue(mAccount_Data.getLast_TimeStamp());
 
         // Firebase FireStore
         Map<String, String> New_Account_Map = new HashMap<>();
@@ -633,7 +636,10 @@ public class New_Card_Activity extends AppCompatActivity {
         New_Account_Map.put("Remark", Remark_EditText.getText().toString());
         New_Account_Map.put("Color Code", String.valueOf(Color_Code));
 
-        mFirebaseFirestore.collection("Account").add(New_Account_Map);
+//        mCollectionReference = mFirebaseFirestore.collection("Account");
+//        mCollectionReference.document("Testing").set(mAccount_Data);
+        DocumentReference mDocumentReference = mFirebaseFirestore.collection("Account").document();
+        mDocumentReference.set(mAccount_Data);
 
         Log.e("Firebase Action", "新增一條紀錄至 Firebase");
         finish();
