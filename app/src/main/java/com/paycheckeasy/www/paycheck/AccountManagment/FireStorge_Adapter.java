@@ -44,7 +44,7 @@ public class FireStorge_Adapter extends FirestoreRecyclerAdapter<Account_Model, 
         if (getItemViewType(position) == R.layout.c2_ac_managment_recycleitem_card){
 
             /***        For Card View      ***/
-            mAccount_Model.setCreate_Date(model.getCreate_Date());
+            //mAccount_Model.setCreate_Date(model.getCreate_Date());
             mAccount_Model.setLast_Modify_Date(model.getLast_Modify_Date());
             mAccount_Model.setCard_Name(model.getCard_Name());
             mAccount_Model.setFirst_Num(model.getFirst_Num());

@@ -119,9 +119,11 @@ public class Account_Model {
         return create_Date;
     }
 
+	/*
     public void setCreate_Date(Date create_Date) {
         this.create_Date = create_Date;
     }
+	*/
 
     public Date getLast_Modify_Date() {
         return last_Modify_Date;

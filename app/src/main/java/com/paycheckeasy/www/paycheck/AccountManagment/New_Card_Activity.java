@@ -138,6 +138,8 @@ public class New_Card_Activity extends AppCompatActivity {
             BankCard_Associations_Text = Value_Intent.getStringExtra("BankCard_Associations");
             Credit_Limit_Text = Value_Intent.getStringExtra("Credit_Limit");
             Remark_Text = Value_Intent.getStringExtra("Remark");
+			
+			mDocumentReference = mFirebaseFirestore.collection("Account").document();
 
         }else {
 
@@ -146,9 +148,9 @@ public class New_Card_Activity extends AppCompatActivity {
             Holder_Name_Text = mFirebaseUser.getDisplayName();
             BankCard_Associations_Text = "";
 
+			mDocumentReference = mFirebaseFirestore.collection("Account").document(DatabaseRef_Key);
         }
-
-
+		
     }
 
 
@@ -527,7 +529,7 @@ public class New_Card_Activity extends AppCompatActivity {
         builder.setPositiveButton("確認", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mDatabaseReference.removeValue();
+                mDocumentReference.delete();
                 finish();
             }
         });
@@ -611,31 +613,20 @@ public class New_Card_Activity extends AppCompatActivity {
                 BankCard_Associations_Text,
                 Credit_Limit_EditText.getText().toString(),
                 Remark_EditText.getText().toString());
-
-        // Save Value to FireStore
-        if (DatabaseRef_Key == null){
-            mDocumentReference = mFirebaseFirestore.collection("Account").document();
-        }else {
-            mDocumentReference = mFirebaseFirestore.collection("Account").document(DatabaseRef_Key);
-        }
-
-        // Set Create Date to FireStore
-        if (DatabaseRef_Key == null){
-/*
-            Map<String, Object> Create_Date = new HashMap<>();
-            Create_Date.put("create_Date", FieldValue.serverTimestamp());
-            mDocumentReference.set(Create_Date);
-*/
-        }
-/*
-        // Set Last Modify Date to FireStore
-        Map<String, Object> Last_Modify_Date = new HashMap<>();
-        Last_Modify_Date.put("last_Modify_Date", FieldValue.serverTimestamp());
-        mDocumentReference.set(Last_Modify_Date);
-*/
+       
         mDocumentReference.set(mAccount_Data).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
+				
+				// Set Create Date to FireStore
+				if (DatabaseRef_Key == null){
+
+					Map<String, Object> Create_Date = new HashMap<>();
+					Create_Date.put("create_Date", FieldValue.serverTimestamp());
+					mDocumentReference.update(Create_Date);
+
+				}
+				
                 finish();
             }
         });
