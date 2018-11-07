@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -618,21 +621,24 @@ public class New_Card_Activity extends AppCompatActivity {
 
         // Set Create Date to FireStore
         if (DatabaseRef_Key == null){
-
+/*
             Map<String, Object> Create_Date = new HashMap<>();
             Create_Date.put("create_Date", FieldValue.serverTimestamp());
             mDocumentReference.set(Create_Date);
-
+*/
         }
-
+/*
         // Set Last Modify Date to FireStore
         Map<String, Object> Last_Modify_Date = new HashMap<>();
         Last_Modify_Date.put("last_Modify_Date", FieldValue.serverTimestamp());
         mDocumentReference.set(Last_Modify_Date);
-
-        mDocumentReference.set(mAccount_Data);
-
-        finish();
+*/
+        mDocumentReference.set(mAccount_Data).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                finish();
+            }
+        });
     }
 
 
