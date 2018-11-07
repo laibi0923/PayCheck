@@ -37,15 +37,15 @@ public class FireStorge_Adapter extends FirestoreRecyclerAdapter<Account_Model, 
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull Account_ViewHolder holder, int position, @NonNull Account_Model model) {
+    protected void onBindViewHolder(@NonNull final Account_ViewHolder holder, final int position, @NonNull Account_Model model) {
 
         final  Account_Model mAccount_Model = new Account_Model();
 
         if (getItemViewType(position) == R.layout.c2_ac_managment_recycleitem_card){
 
             /***        For Card View      ***/
-//            mAccount_Model.setCreated_TimeStamp(model.getCreated_TimeStampLong());
-//            mAccount_Model.setLast_TimeStamp(model.getLast_TimeStampLong());
+            mAccount_Model.setCreate_Date(model.getCreate_Date());
+            mAccount_Model.setLast_Modify_Date(model.getLast_Modify_Date());
             mAccount_Model.setCard_Name(model.getCard_Name());
             mAccount_Model.setFirst_Num(model.getFirst_Num());
             mAccount_Model.setLast_Num(model.getLast_Num());
@@ -65,6 +65,7 @@ public class FireStorge_Adapter extends FirestoreRecyclerAdapter<Account_Model, 
 
                     Intent mIntent = new Intent(context, New_Card_Activity.class);
 
+                    mIntent.putExtra("DatabaseRef_Key", getSnapshots().getSnapshot(position).getId());
                     mIntent.putExtra("Color_Code", mAccount_Model.getColor_Code());
                     mIntent.putExtra("Bank_Name", mAccount_Model.getCard_Name());
                     mIntent.putExtra("Bank_No_First", mAccount_Model.getFirst_Num());
@@ -160,24 +161,14 @@ public class FireStorge_Adapter extends FirestoreRecyclerAdapter<Account_Model, 
     @Override
     public int getItemViewType(int position) {
 
-        if(getItem(position).getType() != null && !getItem(position).getType().equals("Cash")){
-
-            Log.e("getitemview", "c2");
-            return R.layout.c2_ac_managment_recycleitem_card;
-
-            }else if (getItem(position).getType() != null && getItem(position).getType().equals("Cash")) {
-
+        if(getItem(position).getType().equals("Cash")){
             Log.e("getitemview", "c3");
             return R.layout.c3_ac_managment_recycleitem_cash;
+
+        }else{
+            Log.e("getitemview", "c2");
+            return R.layout.c2_ac_managment_recycleitem_card;
         }
-        return position;
-    }
-
-
-    @NonNull
-    @Override
-    public Account_Model getItem(int position) {
-        return super.getItem(position);
     }
 
     @NonNull

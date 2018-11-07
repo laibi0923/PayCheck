@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.paycheckeasy.www.paycheck.Animation.Flip_Card;
 import com.paycheckeasy.www.paycheck.PublicClass.CircleImageView;
@@ -74,7 +75,7 @@ public class New_Card_Activity extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mDatabaseReference;
     private FirebaseFirestore mFirebaseFirestore;
-    private CollectionReference mCollectionReference;
+    private DocumentReference mDocumentReference;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -134,8 +135,6 @@ public class New_Card_Activity extends AppCompatActivity {
             BankCard_Associations_Text = Value_Intent.getStringExtra("BankCard_Associations");
             Credit_Limit_Text = Value_Intent.getStringExtra("Credit_Limit");
             Remark_Text = Value_Intent.getStringExtra("Remark");
-
-            mDatabaseReference = mFirebaseDatabase.getReference().child(mFirebaseUser.getUid()).child("Account").child(DatabaseRef_Key);
 
         }else {
 
@@ -599,10 +598,6 @@ public class New_Card_Activity extends AppCompatActivity {
             return;
         }
 
-        if (DatabaseRef_Key == null){
-            DatabaseRef_Key = mFirebaseDatabase.getReference().push().getKey();
-        }
-
         Account_Model mAccount_Data = new Account_Model(
                 Color_Code,
                 Bank_Name_EditText.getText().toString(),
@@ -614,34 +609,29 @@ public class New_Card_Activity extends AppCompatActivity {
                 Credit_Limit_EditText.getText().toString(),
                 Remark_EditText.getText().toString());
 
+        // Save Value to FireStore
+        if (DatabaseRef_Key == null){
+            mDocumentReference = mFirebaseFirestore.collection("Account").document();
+        }else {
+            mDocumentReference = mFirebaseFirestore.collection("Account").document(DatabaseRef_Key);
+        }
 
-//        mDatabaseReference = mFirebaseDatabase.getReference().child("Account").child(DatabaseRef_Key);
-//        mDatabaseReference.setValue(mAccount_Data);
-//
-//        mDatabaseReference = mFirebaseDatabase.getReference().child("Account").child(DatabaseRef_Key).child(mFirebaseUser.getUid());
-//        mDatabaseReference.setValue(mAccount_Data.getLast_TimeStamp());
+        // Set Create Date to FireStore
+        if (DatabaseRef_Key == null){
 
-        // Firebase FireStore
-        Map<String, String> New_Account_Map = new HashMap<>();
+            Map<String, Object> Create_Date = new HashMap<>();
+            Create_Date.put("create_Date", FieldValue.serverTimestamp());
+            mDocumentReference.set(Create_Date);
 
-        New_Account_Map.put("Create Date", String.valueOf(ServerValue.TIMESTAMP));
-        New_Account_Map.put("Last Modify", String.valueOf(ServerValue.TIMESTAMP));
-        New_Account_Map.put("Bank Name", Bank_Name_EditText.getText().toString());
-        New_Account_Map.put("Bank First Number", Bank_No_First_EditText.getText().toString());
-        New_Account_Map.put("Bank Last Number", Bank_No_Last_EditText.getText().toString());
-        New_Account_Map.put("Holder Name", Holder_Name_EditText.getText().toString());
-        New_Account_Map.put("Expirty Date", Expiry_Date_EditText.getText().toString());
-        New_Account_Map.put("Card Type", BankCard_Associations_Text);
-        New_Account_Map.put("Card Balance", Credit_Limit_EditText.getText().toString());
-        New_Account_Map.put("Remark", Remark_EditText.getText().toString());
-        New_Account_Map.put("Color Code", String.valueOf(Color_Code));
+        }
 
-//        mCollectionReference = mFirebaseFirestore.collection("Account");
-//        mCollectionReference.document("Testing").set(mAccount_Data);
-        DocumentReference mDocumentReference = mFirebaseFirestore.collection("Account").document();
+        // Set Last Modify Date to FireStore
+        Map<String, Object> Last_Modify_Date = new HashMap<>();
+        Last_Modify_Date.put("last_Modify_Date", FieldValue.serverTimestamp());
+        mDocumentReference.set(Last_Modify_Date);
+
         mDocumentReference.set(mAccount_Data);
 
-        Log.e("Firebase Action", "新增一條紀錄至 Firebase");
         finish();
     }
 

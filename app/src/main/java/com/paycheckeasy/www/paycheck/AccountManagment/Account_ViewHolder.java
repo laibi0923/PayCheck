@@ -29,7 +29,7 @@ public class Account_ViewHolder extends RecyclerView.ViewHolder{
 
 
 	// Card
-    public TextView Last_Modift_TextView;
+    public TextView Last_Modify_TextView;
     public LinearLayout Card_Front_Background;
     public EditText Bank_Name_EditTextView, Bank_No_First_EditText, Bank_No_Last_EditText, Holder_Name_EditText, Expiry_Date_EditText;
     public ImageView BankCard_Associations;
@@ -54,7 +54,7 @@ public class Account_ViewHolder extends RecyclerView.ViewHolder{
         if (Type == "Cash"){
 
             // Cash
-            Last_Modift_TextView = view.findViewById(R.id.last_modify_textview);
+            Last_Modify_TextView = view.findViewById(R.id.last_modify_textview);
 
             Card_Front_Background = view.findViewById(R.id.card_front_background);
 
@@ -74,7 +74,7 @@ public class Account_ViewHolder extends RecyclerView.ViewHolder{
 
         }else {
 
-            Last_Modift_TextView = view.findViewById(R.id.last_modify_textview);
+            Last_Modify_TextView = view.findViewById(R.id.last_modify_textview);
 
             Card_Front_Background = view.findViewById(R.id.card_front_background);
 
@@ -116,7 +116,9 @@ public class Account_ViewHolder extends RecyclerView.ViewHolder{
 
     public void setCardValue(Account_Model value) {
 
-//        Last_Modift_TextView.setText(formatter.format(value.getLast_TimeStampLong()));
+//        Last_Modify_TextView.setText(formatter.format(value.getLast_TimeStampLong()));
+
+        Last_Modify_TextView.setText(formatter.format(value.getLast_Modify_Date()));
 
         int Color_Code = value.getColor_Code();
         Drawable Background_Color = null;
@@ -181,7 +183,7 @@ public class Account_ViewHolder extends RecyclerView.ViewHolder{
 
 	public void setCashValue(Account_Model value){
 
-//		Last_Modift_TextView.setText(formatter.format(value.getLast_TimeStampLong()));
+//		Last_Modify_TextView.setText(formatter.format(value.getLast_TimeStampLong()));
 
         int Color_Code = value.getColor_Code();
         Drawable Background_Color = null;

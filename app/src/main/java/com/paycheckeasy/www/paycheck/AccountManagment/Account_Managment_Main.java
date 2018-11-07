@@ -185,9 +185,9 @@ public class Account_Managment_Main extends Fragment
         */
 
         // 查詢條件
-        Query query = mCollectionReference.orderBy("card_Name");
+        Query query = mCollectionReference.orderBy("last_Modify_Date");
 
-        FirestoreRecyclerOptions<Account_Model> options = new FirestoreRecyclerOptions.Builder<Account_Model>()
+        final FirestoreRecyclerOptions<Account_Model> options = new FirestoreRecyclerOptions.Builder<Account_Model>()
                 .setQuery(query, Account_Model.class)
                 .build();
 
@@ -203,7 +203,6 @@ public class Account_Managment_Main extends Fragment
                 mRecyclerView.setAdapter(mFireStorge_Adapter);
                 //  如沒有料資將返回空視圖
                 mRecyclerView.setEmptyView(mRecycle_EmptyView);
-
             }
         });
 
@@ -268,13 +267,6 @@ public class Account_Managment_Main extends Fragment
             }
         }
     };
-
-
-    public String get_current_DateAndTime(){
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String time = formatter.format(Calendar.getInstance().getTime());
-        return time ;
-    }
 
 
     private void Show_TypeMenu(){
