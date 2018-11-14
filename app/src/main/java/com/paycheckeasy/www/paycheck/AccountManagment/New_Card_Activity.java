@@ -627,9 +627,15 @@ public class New_Card_Activity extends AppCompatActivity {
 
 				}
 				
+				Map<String, Object> ownerby = new HashMap<>();
+				ownerby.put(mFirebaseUser.getUid(), "owner");
+				mDocumentReference.collection("member").add(ownerby);
+				
                 finish();
             }
         });
+		
+		
     }
 
 
