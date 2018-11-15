@@ -81,9 +81,13 @@ public class MainActivity extends AppCompatActivity
 
 	// FireBase Auth & Storage
 	private FirebaseFirestore mFirebaseFirestore;
+
 	private FirebaseAuth mFirebaseAuth;
+
 	private StorageReference mStorageReference;
+
 	private DatabaseReference connectedRef;
+
 	private DatabaseReference online_status;
 	private DatabaseReference last_online_time;
 	
@@ -95,7 +99,6 @@ public class MainActivity extends AppCompatActivity
 	private String Online_Text = "Online";
 	private String Offline_Text = "Offline";
 
-	private SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 	@Override
     protected void onCreate(Bundle savedInstanceState)

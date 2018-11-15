@@ -49,7 +49,7 @@ public class Register_YearOfBirth extends Fragment {
                 }
 
                 if (Integer.parseInt(YOB_Result) > 1953 && Integer.parseInt(YOB_Result) < 2018){
-                    ((Register_Elf_Main) getActivity()).Register_BOY_Value = YOB_Result;
+                    ((Register_Elf_Main) getActivity()).Register_DOB_Value = YOB_Result;
                     Fragment Current_Fragment = new Register_Finish();
                     ((Register_Elf_Main) getActivity()). Fragment_Transaction(Current_Fragment, 0, 0, true, "finish");
                 }else {

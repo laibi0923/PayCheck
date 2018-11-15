@@ -139,7 +139,7 @@ public class New_Card_Activity extends AppCompatActivity {
             Credit_Limit_Text = Value_Intent.getStringExtra("Credit_Limit");
             Remark_Text = Value_Intent.getStringExtra("Remark");
 			
-			mDocumentReference = mFirebaseFirestore.collection("Account").document();
+			mDocumentReference = mFirebaseFirestore.collection("Account").document(DatabaseRef_Key);
 
         }else {
 
@@ -148,7 +148,7 @@ public class New_Card_Activity extends AppCompatActivity {
             Holder_Name_Text = mFirebaseUser.getDisplayName();
             BankCard_Associations_Text = "";
 
-			mDocumentReference = mFirebaseFirestore.collection("Account").document(DatabaseRef_Key);
+			mDocumentReference = mFirebaseFirestore.collection("Account").document();
         }
 		
     }
@@ -617,7 +617,11 @@ public class New_Card_Activity extends AppCompatActivity {
         mDocumentReference.set(mAccount_Data).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-				
+
+//                Map<String, Object> member_list = new HashMap<>();
+//                member_list.put(mFirebaseUser.getUid(), FieldValue.serverTimestamp());
+//                mDocumentReference.update(member_list);
+//
 				// Set Create Date to FireStore
 				if (DatabaseRef_Key == null){
 
