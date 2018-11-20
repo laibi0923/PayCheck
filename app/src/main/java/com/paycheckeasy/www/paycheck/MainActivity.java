@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
@@ -24,8 +25,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -86,15 +89,16 @@ public class MainActivity extends AppCompatActivity
 
 	private StorageReference mStorageReference;
 
+	private FirebaseDatabase mFirebaseDatabase;
+
 	private DatabaseReference connectedRef;
 
-	private DatabaseReference online_status;
-	private DatabaseReference last_online_time;
-	
+	private DatabaseReference Online_Status_For_Database;
+
 	private FirebaseFirestore mFirebaseFirestore;
 	
-	private DocumentReference Online_Status_Ref;
-	private DocumentReference Last_Midified_Ref;
+	private DocumentReference Online_Status_For_FireStore;
+
 	
 	
 	// User Photo Information
@@ -149,8 +153,10 @@ public class MainActivity extends AppCompatActivity
 		// TODO: Implement this method
 		super.onStart();
 
-		Online_Status_Ref = mFirebaseFirestore.collection("User Profile").document(Uid_Text);
-		
+		Online_Status_For_FireStore = mFirebaseFirestore.collection("User Profile").document(Uid_Text);
+
+        Online_Status_For_Database = mFirebaseDatabase.getInstance().getReference().child(Uid_Text).child("status");
+
 		connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
 
 		connectedRef.addValueEventListener(new ValueEventListener(){
@@ -159,32 +165,21 @@ public class MainActivity extends AppCompatActivity
 				public void onDataChange(DataSnapshot snapshot)
 				{
 					// TODO: Implement this method
-					boolean connected = snapshot.getValue(Boolean.class);
-					Log.e("connected",connected + "");
-					
-					if(connected){
 
-						//online_status.setValue(Online_Text);
+					boolean conneted = snapshot.getValue(Boolean.class);
 
-						//online_status.onDisconnect().setValue(Offline_Text);
+					if (conneted == true){
 
-						//last_online_time.onDisconnect().setValue(ServerValue.TIMESTAMP);
+						Online_Status_For_Database.setValue(Online_Text);
 
-						Map<String, Object> status_map = new HashMap<>();
-						status_map.put("Status", Online_Text);
-						
-						Online_Status_Ref.update(status_map);
-						
-					}else{
+						Online_Status_For_Database.onDisconnect().setValue(Offline_Text);
 
-						//online_status.setValue(Offline_Text);
-						Map<String, Object> status_map = new HashMap<>();
-						status_map.put("Status", Offline_Text);
-						status_map.put("Offline_Time", FieldValue.serverTimestamp());
-						
-						Online_Status_Ref.update(status_map);
+					}else {
+
+						Online_Status_For_Database.setValue(Offline_Text);
 
 					}
+
 				}
 
 				@Override
@@ -194,6 +189,7 @@ public class MainActivity extends AppCompatActivity
 				}
 			});
 	}
+
 
 
 	/*
