@@ -21,11 +21,10 @@ import java.io.*;
 
 import android.Manifest;
 import com.paycheckeasy.www.paycheck.R;
+import com.google.firebase.firestore.*;
 
 public class UserProfile_Main extends AppCompatActivity {
 	
-	private StorageReference mStorageReference;
-
     private final int IMAGE_CODE = 800;
     private final int RESIZE_IMAGE_CODE = 900;
 
@@ -41,8 +40,14 @@ public class UserProfile_Main extends AppCompatActivity {
 	// Firebase
 	private FirebaseAuth mFirebaseAuth;
 	private FirebaseUser mFirebaseUser;
+	
 	private FirebaseDatabase mFirebaseDatabase;
 	private DatabaseReference mDatabaseReference;
+	
+	private FirebaseFirestore mFirebaseFirestore;
+	private DocumentReference mDocumentReference;
+	
+	private StorageReference mStorageReference;
 
 	public static int DIALOG_REQUEST_CODE = 303;
 
@@ -96,11 +101,19 @@ public class UserProfile_Main extends AppCompatActivity {
 			// 1.UserProfile Main 設置用戶名稱
 			User_Name_TextView.setText(data.getStringExtra("Current_UserName"));
 			
-			// 2.將用戶名稱上載至伺服器 
+			/*
+			// 2.將用戶名稱上載至伺服器 (Firedatabase)
 			FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
 			DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference();
 			mDatabaseReference.child("User Information").child(Uid_Text).child("Profile").child("name").setValue(data.getStringExtra("Current_UserName"));
+			*/
+			
+			// 2. 將用戶名稱上載至伺服器 (Firestoge)
+			mDocumentReference.collection("User Profile")
+								.document(mFirebaseUser.getUid())
+								.update("User_Name", data.getStringArrayExtra("Current_UserName"));
 
+			// 3.更新 FirebaseAuth 用戶名稱
 			UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder().setDisplayName(data.getStringExtra("Current_UserName")).build();
 			mFirebaseUser.updateProfile(profileUpdate);
 		}
@@ -151,7 +164,9 @@ public class UserProfile_Main extends AppCompatActivity {
 		// Firebase Database
 		mFirebaseDatabase = FirebaseDatabase.getInstance();
 		mDatabaseReference = mFirebaseDatabase.getReference();
-
+		
+		// Firebase Firestore
+		mFirebaseFirestore = FirebaseFirestore.getInstance();
     }
 
 
@@ -205,18 +220,50 @@ public class UserProfile_Main extends AppCompatActivity {
     }
 	
 	
-	/*
+	
 	// 上傳相片 FireStorage
 	public void upload_image(Uri image_uri){
 		
 		UploadTask upload_image_task = mStorageReference.child(Uid_Text).child("IMG_User_Icon.jpg").putFile(image_uri);
+		
+		Task<Uri> uri_Task = upload_image_task.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>(){
+
+				@Override
+				public Task<Uri> then(Task<UploadTask.TaskSnapshot> task) throws Exception
+				{
+					// TODO: Implement this method
+					if(!task.isSuccessful()){
+						throw task.getException();
+					}
+					return mStorageReference.getDownloadUrl();
+				}
+			}).addOnCompleteListener(new OnCompleteListener<Uri>(){
+
+				@Override
+				public void onComplete(Task<Uri> task)
+				{
+					// TODO: Implement this method
+					if(task.isSuccessful()){
+						
+						Uri downloadUri = task.getResult();
+						
+					}else{
+						
+					}
+					
+				}
+				
+			});
+		
+		
+		
+		
 		upload_image_task.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
 
 				@Override
 				public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
 				{
 					// TODO: Implement this method
-					Log.e("Upload Link", taskSnapshot.getDownloadUrl().toString());
 					
 					// Save to Firebase Auth
 					UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder().setPhotoUri(taskSnapshot.getDownloadUrl()).build();
@@ -247,7 +294,7 @@ public class UserProfile_Main extends AppCompatActivity {
 				}
 			});
 	}
-	*/
+	
 	
 	
 	public void set_username_text(String text){
