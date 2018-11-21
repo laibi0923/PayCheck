@@ -86,9 +86,8 @@ public class UserProfile_Main extends AppCompatActivity {
                     mCircleImageView.setImageBitmap(bitmap);
 					
 					// 2.上傳相片至伺服器
-//					upload_image(Resize_Image_Uri);
+					upload_image(Resize_Image_Uri);
 					
-					// 3.
                 }
             }catch (FileNotFoundException note){
                 note.printStackTrace();
@@ -226,7 +225,7 @@ public class UserProfile_Main extends AppCompatActivity {
 		
 		UploadTask upload_image_task = mStorageReference.child(Uid_Text).child("IMG_User_Icon.jpg").putFile(image_uri);
 		
-		Task<Uri> uri_Task = upload_image_task.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>(){
+		upload_image_task.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>(){
 
 				@Override
 				public Task<Uri> then(Task<UploadTask.TaskSnapshot> task) throws Exception
@@ -237,6 +236,7 @@ public class UserProfile_Main extends AppCompatActivity {
 					}
 					return mStorageReference.getDownloadUrl();
 				}
+				
 			}).addOnCompleteListener(new OnCompleteListener<Uri>(){
 
 				@Override
@@ -247,7 +247,18 @@ public class UserProfile_Main extends AppCompatActivity {
 						
 						Uri downloadUri = task.getResult();
 						
+						// 1. Save to Firebase Auth
+						UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder().setPhotoUri(downloadUri).build();
+						mFirebaseUser.updateProfile(profileUpdate);
+						
+						// 2. 將用戶名稱上載至伺服器 (Firestoge)
+						mDocumentReference.collection("User Profile")
+							.document(mFirebaseUser.getUid())
+							.update("User_Photo_Uri", downloadUri.toString());
+						
 					}else{
+						
+						Log.e("Upload Fail", task.getException().getMessage() + "");
 						
 					}
 					
@@ -255,45 +266,7 @@ public class UserProfile_Main extends AppCompatActivity {
 				
 			});
 		
-		
-		
-		
-		upload_image_task.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
-
-				@Override
-				public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
-				{
-					// TODO: Implement this method
-					
-					// Save to Firebase Auth
-					UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder().setPhotoUri(taskSnapshot.getDownloadUrl()).build();
-					mFirebaseUser.updateProfile(profileUpdate).addOnCompleteListener(new OnCompleteListener<Void>(){
-
-							@Override
-							public void onComplete(Task p1)
-							{
-								// TODO: Implement this method
-								Log.e("Update Profile", "ok");
-							}
-						});
-					
-					// Save to Firebase Database
-					FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-					DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference(Uid_Text);
-					mDatabaseReference.child("User Information").child(Uid_Text).child("Profile").child("photo_Uri").setValue(taskSnapshot.getDownloadUrl().toString());
-				}
-			});
-			
-		upload_image_task.addOnFailureListener(new OnFailureListener(){
-
-				@Override
-				public void onFailure(Exception e)
-				{
-					// TODO: Implement this method
-					Log.e("Upload Fail", e.getMessage() + "");
-				}
-			});
-	}
+		}
 	
 	
 	
