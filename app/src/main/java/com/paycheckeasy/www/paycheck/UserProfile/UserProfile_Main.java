@@ -106,11 +106,10 @@ public class UserProfile_Main extends AppCompatActivity {
 			DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference();
 			mDatabaseReference.child("User Information").child(Uid_Text).child("Profile").child("name").setValue(data.getStringExtra("Current_UserName"));
 			*/
-			
+
+			Log.e("Setip set name", data.getStringExtra("Current_UserName"));
 			// 2. 將用戶名稱上載至伺服器 (Firestoge)
-			mDocumentReference.collection("User Profile")
-								.document(mFirebaseUser.getUid())
-								.update("User_Name", data.getStringArrayExtra("Current_UserName"));
+			mDocumentReference.update("User_Name", data.getStringExtra("Current_UserName"));
 
 			// 3.更新 FirebaseAuth 用戶名稱
 			UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder().setDisplayName(data.getStringExtra("Current_UserName")).build();
@@ -131,8 +130,7 @@ public class UserProfile_Main extends AppCompatActivity {
 
 	// 攔截返回鍵
 	@Override
-	public void onBackPressed()
-	{
+	public void onBackPressed() {
 		// TODO: Implement this method
 		super.onBackPressed();
 		go_back();
@@ -158,7 +156,7 @@ public class UserProfile_Main extends AppCompatActivity {
 		mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
 		// Firebase Storage
-		mStorageReference = FirebaseStorage.getInstance().getReference();
+		mStorageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://paycheck-d2d7b.appspot.com");
 
 		// Firebase Database
 		mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -166,6 +164,10 @@ public class UserProfile_Main extends AppCompatActivity {
 		
 		// Firebase Firestore
 		mFirebaseFirestore = FirebaseFirestore.getInstance();
+
+		// DocumentReference
+        mDocumentReference = mFirebaseFirestore.collection("User Profile").document(mFirebaseUser.getUid());
+
     }
 
 
@@ -232,9 +234,13 @@ public class UserProfile_Main extends AppCompatActivity {
 				{
 					// TODO: Implement this method
 					if(!task.isSuccessful()){
+
 						throw task.getException();
+
 					}
+
 					return mStorageReference.getDownloadUrl();
+
 				}
 				
 			}).addOnCompleteListener(new OnCompleteListener<Uri>(){
@@ -252,9 +258,7 @@ public class UserProfile_Main extends AppCompatActivity {
 						mFirebaseUser.updateProfile(profileUpdate);
 						
 						// 2. 將用戶名稱上載至伺服器 (Firestoge)
-						mDocumentReference.collection("User Profile")
-							.document(mFirebaseUser.getUid())
-							.update("User_Photo_Uri", downloadUri.toString());
+						mDocumentReference.update("User_Photo_Uri", downloadUri.toString());
 						
 					}else{
 						

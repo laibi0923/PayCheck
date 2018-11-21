@@ -174,9 +174,6 @@ public class MainActivity extends AppCompatActivity
 
 						Online_Status_For_Database.onDisconnect().setValue(Offline_Text);
 
-					}else {
-
-						Online_Status_For_Database.setValue(Offline_Text);
 
 					}
 
