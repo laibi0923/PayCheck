@@ -94,20 +94,18 @@ public class Account_Managment_Main extends Fragment
 
 		super.onCreate(savedInstanceState);
 
+
+
+        mFirebaseFirestore = FirebaseFirestore.getInstance();
+
+
+
+        mCollectionReference = mFirebaseFirestore.collection("Account");
+
+
 		mFirebaseDatabase = FirebaseDatabase.getInstance();
 
 		mDatabaseReference = mFirebaseDatabase.getReference();
-
-
-        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setTimestampsInSnapshotsEnabled(true)
-                .build();
-
-		mFirebaseFirestore = FirebaseFirestore.getInstance();
-
-        mFirebaseFirestore.setFirestoreSettings(settings);
-
-        mCollectionReference = mFirebaseFirestore.collection("Account");
 
 		mRecyclerView_List = new ArrayList<>();
 	}

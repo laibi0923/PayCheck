@@ -124,6 +124,15 @@ public class MainActivity extends AppCompatActivity
 		Restore_Fragment(savedInstanceState);
 
 		mFirebaseFirestore = FirebaseFirestore.getInstance();
+
+		FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+				.setTimestampsInSnapshotsEnabled(true)
+				.build();
+
+
+		mFirebaseFirestore.setFirestoreSettings(settings);
+
+
 		
 		// 設置用戶頭像
 		Local_UserPhoto_Image = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), UserPhoto_Name);
