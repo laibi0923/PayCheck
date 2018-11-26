@@ -182,10 +182,11 @@ public class Account_ViewHolder extends RecyclerView.ViewHolder{
 
 
 	public void setCashValue(Account_Model value){
-
-//		Last_Modify_TextView.setText(formatter.format(value.getLast_TimeStampLong()));
+		
+		Last_Modify_TextView.setText(formatter.format(value.getLast_Modify_Date()));
 
         int Color_Code = value.getColor_Code();
+		
         Drawable Background_Color = null;
 
         if(Color_Code == 0){
