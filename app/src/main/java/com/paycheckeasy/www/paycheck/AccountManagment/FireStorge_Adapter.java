@@ -114,8 +114,8 @@ public class FireStorge_Adapter extends FirestoreRecyclerAdapter<Account_Model, 
         }else {
 
             /***        For Cash View      ***/
-//            mAccount_Model.setCreated_TimeStamp(model.getCreated_TimeStampLong());
-//            mAccount_Model.setLast_TimeStamp(model.getLast_TimeStampLong());
+			//mAccount_Model.setCreate_Date(model.getCreate_Date());
+            mAccount_Model.setLast_Modify_Date(model.getLast_Modify_Date());
             mAccount_Model.setColor_Code(model.getColor_Code());
             mAccount_Model.setCard_Name(model.getCard_Name());
             mAccount_Model.setAmount(model.getAmount());
