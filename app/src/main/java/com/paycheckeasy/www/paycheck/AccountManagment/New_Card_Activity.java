@@ -598,6 +598,8 @@ public class New_Card_Activity extends AppCompatActivity {
             Error_Message_TextView.setText("Expiry Date Null");
             return;
         }
+		
+		
 
         Account_Model mAccount_Data = new Account_Model(
                 Color_Code,
@@ -627,9 +629,9 @@ public class New_Card_Activity extends AppCompatActivity {
 
 				}
 				
-				Map<String, Object> ownerby = new HashMap<>();
-				ownerby.put(mFirebaseUser.getUid(), "owner");
-				mDocumentReference.collection("member").add(ownerby);
+				Map<String, Object> member_map = new HashMap<>();
+				member_map.put("member", FieldValue.arrayUnion(mFirebaseUser.getUid()));
+				mDocumentReference.update(member_map);
 				
                 finish();
             }
