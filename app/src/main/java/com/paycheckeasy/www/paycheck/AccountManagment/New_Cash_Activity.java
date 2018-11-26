@@ -1,20 +1,21 @@
 package com.paycheckeasy.www.paycheck.AccountManagment;
-import android.animation.Animator;
+import android.animation.*;
 import android.content.*;
 import android.os.*;
+import android.support.annotation.*;
 import android.support.v7.app.*;
-import android.util.Log;
 import android.view.*;
-import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.*;
 import android.widget.*;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.android.gms.tasks.*;
+import com.google.firebase.auth.*;
+import com.google.firebase.firestore.*;
 import com.paycheckeasy.www.paycheck.*;
-import com.paycheckeasy.www.paycheck.Animation.Flip_Card;
-import com.paycheckeasy.www.paycheck.PublicClass.CircleImageView;
+import com.paycheckeasy.www.paycheck.Animation.*;
+import com.paycheckeasy.www.paycheck.PublicClass.*;
+import java.util.*;
+
+import com.paycheckeasy.www.paycheck.R;
 
 public class New_Cash_Activity extends AppCompatActivity
 {
@@ -48,25 +49,25 @@ public class New_Cash_Activity extends AppCompatActivity
 	private String DatabaseRef_Key;
 
 	// Firebase
-	private FirebaseDatabase mFirebaseDatabase;
 	private FirebaseAuth mFirebaseAuth;
 	private FirebaseUser mFirebaseUser;
-	private DatabaseReference mDatabaseReference;
+	private FirebaseFirestore mFirebaseFirestore;
+	private DocumentReference mDocumentReference;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO: Implement this method
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.d4_newcash_activity);
 
 		mFirebaseAuth = FirebaseAuth.getInstance();
 
 		mFirebaseUser = mFirebaseAuth.getCurrentUser();
-
-		mFirebaseDatabase = FirebaseDatabase.getInstance();
-
-		mDatabaseReference = mFirebaseDatabase.getReference();
 		
+		mFirebaseFirestore = FirebaseFirestore.getInstance();
+
 		Init_Value();
 
 		Loan_Animation();
@@ -74,6 +75,17 @@ public class New_Cash_Activity extends AppCompatActivity
 		Find_View();
 		
 	}
+	
+	
+	/*
+	 *  攔截返回鍵
+	 *  當用戶按下返回鍵時, 提示用戶所輸入資料末保仔存
+	 */
+	@Override
+	public void onBackPressed() {
+		// super.onBackPressed();
+		Show_Exit_Dialog();
+	} 
 	
 	
 	/* 
@@ -95,20 +107,21 @@ public class New_Cash_Activity extends AppCompatActivity
 			 Card_Limit_Text = Value_Intent.getStringExtra("Card_Limit");
 			 Remark_Text = Value_Intent.getStringExtra("Remark");
 
-			 mDatabaseReference = mFirebaseDatabase.getReference().child("User Information").child(mFirebaseUser.getUid()).child("Account").child(DatabaseRef_Key);
-
+			 mDocumentReference = mFirebaseFirestore.collection("Account").document(DatabaseRef_Key);
+			 
 		 }else {
 
 			 // (2) 全新資料
 			 Toolbar_Title_Text = "新增現金帳戶";
 			 Holder_Name_Text = mFirebaseUser.getDisplayName();
+			 
+			 mDocumentReference = mFirebaseFirestore.collection("Account").document();
 
-			 mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("User Information").child(mFirebaseUser.getUid()).child("Account").push();
 		 }
 
 	 }
 	
-	
+	 
 	/*
 	 *
 	 */
@@ -231,15 +244,7 @@ public class New_Cash_Activity extends AppCompatActivity
 		 
 	 };
 
-	/*
-	 *  攔截返回鍵
-	 *  當用戶按下返回鍵時, 提示用戶所輸入資料末保仔存
-	 */
-	@Override
-	public void onBackPressed() {
-		// super.onBackPressed();
-		Show_Exit_Dialog();
-	}
+	
 
 
 	 /*
@@ -259,25 +264,37 @@ public class New_Cash_Activity extends AppCompatActivity
 			  return;
 		  }
 
-		  if (DatabaseRef_Key == null){
-			  DatabaseRef_Key = mFirebaseDatabase.getReference().push().getKey();
-		  }
-
 		  Account_Model mAccount_Data = new Account_Model(
-				  Color_Code,
-				  Card_Name_Text,
-				  "Cash",
-				  Card_Limit_Text,
-				  Remark_Text);
+			  Color_Code,
+			  Card_Name_EditText.getText().toString(),
+			  "Cash",
+			  Card_Limit_EditText.getText().toString(),
+			  Card_Remark_EditText.getText().toString());
 
-		  mDatabaseReference = mFirebaseDatabase.getReference().child("Account").child(DatabaseRef_Key);
-		  mDatabaseReference.setValue(mAccount_Data);
+		  mDocumentReference.set(mAccount_Data).addOnCompleteListener(new OnCompleteListener<Void>() {
+				  @Override
+				  public void onComplete(@NonNull Task<Void> task) {
 
-		  mDatabaseReference = mFirebaseDatabase.getReference().child("Account").child(DatabaseRef_Key).child(mFirebaseUser.getUid());
-//		  mDatabaseReference.setValue(mAccount_Data.getLast_TimeStamp());
+//                Map<String, Object> member_list = new HashMap<>();
+//                member_list.put(mFirebaseUser.getUid(), FieldValue.serverTimestamp());
+//                mDocumentReference.update(member_list);
+//
+					  // Set Create Date to FireStore
+					  if (DatabaseRef_Key == null){
 
-		  Log.e("Firebase Action", "新增一條紀錄至 Firebase");
-		  finish();
+						  Map<String, Object> Create_Date = new HashMap<>();
+						  Create_Date.put("create_Date", FieldValue.serverTimestamp());
+						  mDocumentReference.update(Create_Date);
+
+					  }
+
+					  Map<String, Object> ownerby = new HashMap<>();
+					  ownerby.put(mFirebaseUser.getUid(), "owner");
+					  mDocumentReference.collection("member").add(ownerby);
+
+					  finish();
+				  }
+			  });
 
 	  }
 	 
@@ -318,7 +335,7 @@ public class New_Cash_Activity extends AppCompatActivity
         builder.setPositiveButton("確認", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					mDatabaseReference.removeValue();
+					mDocumentReference.delete();
 					finish();
 				}
 			});

@@ -73,10 +73,8 @@ public class New_Card_Activity extends AppCompatActivity {
     private String DatabaseRef_Key;
 
     // Firebase
-    private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-    private DatabaseReference mDatabaseReference;
     private FirebaseFirestore mFirebaseFirestore;
     private DocumentReference mDocumentReference;
 
@@ -90,8 +88,6 @@ public class New_Card_Activity extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         mFirebaseFirestore = FirebaseFirestore.getInstance();
 
